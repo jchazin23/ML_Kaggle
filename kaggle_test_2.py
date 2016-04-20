@@ -48,18 +48,22 @@ data_hold_out_y = train_data_y.loc[100000:]
 #Ensemble --> Random Forests
 
 from sklearn.ensemble import RandomForestClassifier
-clf = RandomForestClassifier(n_estimators=10)
-clf = clf.fit(data_train_x,data_train_y)
-
-hold_out_y_hat = clf.predict(data_hold_out_x)
-score = np.sum(hold_out_y_hat == np.array(data_hold_out_y))/float(len(hold_out_y_hat))
-print score
-##0.939002123933
+#clf = RandomForestClassifier(n_estimators=10)
+#clf = clf.fit(data_train_x,data_train_y)
 #
-#
-quiz_y_hat = pd.DataFrame(clf.predict(quiz_encoded))
-quiz_y_hat.to_csv('quiz_pred_1.csv')
+#hold_out_y_hat = clf.predict(data_hold_out_x)
+#score = np.sum(hold_out_y_hat == np.array(data_hold_out_y))/float(len(hold_out_y_hat))
+#print score
+###0.939002123933
+##
+##
+#quiz_y_hat = pd.DataFrame(clf.predict(quiz_encoded))
+#quiz_y_hat.to_csv('quiz_pred_1.csv')
 
+clf2 = RandomForestClassifier(n_estimators = 10)
+clf2 = clf2.fit(train_encoded_x,train_data_y)
+quiz_y_hat2 = pd.DataFrame(clf2.predict(quiz_encoded))
+quiz_y_hat2.to_csv('quiz_pred_2.csv')
 
 
 
