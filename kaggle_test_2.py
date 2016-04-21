@@ -48,22 +48,37 @@ data_hold_out_y = train_data_y.loc[100000:]
 #Ensemble --> Random Forests
 
 from sklearn.ensemble import RandomForestClassifier
-#clf = RandomForestClassifier(n_estimators=10)
-#clf = clf.fit(data_train_x,data_train_y)
+
+#n_estimators_scores = {}
 #
-#hold_out_y_hat = clf.predict(data_hold_out_x)
-#score = np.sum(hold_out_y_hat == np.array(data_hold_out_y))/float(len(hold_out_y_hat))
-#print score
-###0.939002123933
+#k_estimators = [5,10,15,20,25,30,35,40]
+#
+#for i in range(len(k_estimators)):
+#    clf = RandomForestClassifier(n_estimators=k_estimators[i])
+#    clf = clf.fit(data_train_x,data_train_y)
+#    hold_out_y_hat = clf.predict(data_hold_out_x)
+#    score = np.sum(hold_out_y_hat == np.array(data_hold_out_y))/float(len(hold_out_y_hat))
+#    n_estimators_scores[k_estimators[i]] = score
+#
+#print n_estimators_scores
+###40 estimators = 0.94410701643253714
 ##
 ##
 #quiz_y_hat = pd.DataFrame(clf.predict(quiz_encoded))
 #quiz_y_hat.to_csv('quiz_pred_1.csv')
 
-clf2 = RandomForestClassifier(n_estimators = 10)
+
+##Best score so far seems to be at n = 52 for number of estimators
+##Extremely diminishing returns thereafter
+clf2 = RandomForestClassifier(n_estimators = 52)
 clf2 = clf2.fit(train_encoded_x,train_data_y)
 quiz_y_hat2 = pd.DataFrame(clf2.predict(quiz_encoded))
-quiz_y_hat2.to_csv('quiz_pred_2.csv')
+quiz_y_hat2.to_csv('quiz_pred_n_52.csv')
+
+##What about...PCA?
+##SVD?
+##Can PCA/SVD be done after one-hot encoding? Shouldn't matter, right?
+##Can PCA/SVD be done on categorical data (pre-on-hot)?
 
 
 
